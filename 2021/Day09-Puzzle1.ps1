@@ -1,5 +1,4 @@
 $puzzleInput = Get-Content 'C:\Users\Nathan Ziehnert\OneDrive - Z-Nerd\Documents\AOC\2021\09\input.txt'
-#$puzzleInput = Get-Content 'C:\Users\Nathan Ziehnert\OneDrive - Z-Nerd\Documents\AOC\2021\09\test-input.txt'
 
 $puzzleX = $puzzleInput[0].ToCharArray().Count
 $puzzleY = $puzzleInput.Count
