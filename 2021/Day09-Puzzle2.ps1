@@ -55,21 +55,17 @@ $lowSpots = @() #Coordinates
 $directions = @("N","S","E","W")
 for($i = 0; $i -lt $puzzleY; $i++)
 {
-    for($j = 0; $j -lt $puzzleX; $j++)
+    :point for($j = 0; $j -lt $puzzleX; $j++)
     {
         $lowSpot = $true
         foreach($direction in $directions)
         {
             if($null -ne $mapArray[$j,$i].$direction -and $mapArray[$j,$i].Value -ge $mapArray[$j,$i].$direction)
             {
-                $lowSpot = $false
-                break
+                continue point
             }
         }
-        if($lowSpot)
-        {
-            $lowSpots += @{x=$j;y=$i}
-        }
+        $lowSpots += @{x=$j;y=$i}
     }
 }
 
