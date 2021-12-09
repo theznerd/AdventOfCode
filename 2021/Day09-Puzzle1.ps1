@@ -1,4 +1,3 @@
-$ErrorActionPreference = "Continue"
 $puzzleInput = Get-Content 'C:\Users\Nathan Ziehnert\OneDrive - Z-Nerd\Documents\AOC\2021\09\input.txt'
 #$puzzleInput = Get-Content 'C:\Users\Nathan Ziehnert\OneDrive - Z-Nerd\Documents\AOC\2021\09\test-input.txt'
 
@@ -28,101 +27,24 @@ for($i = 0; $i -lt $puzzleY; $i++)
 # Find Low spots
 $lowSpotsRisk = 0
 $lowSpotCount = 0
+$directions = @("N","S","E","W")
 for($i = 0; $i -lt $puzzleY; $i++)
 {
     for($j = 0; $j -lt $puzzleX; $j++)
     {
-        if(($j -eq 0 -or $j -eq $puzzleX-1) -and ($i -eq 0 -or $i -eq $puzzleY))
+        $lowSpot = $true
+        foreach($direction in $directions)
         {
-            if($i -eq 0 -and $j -eq 0)
+            if($null -ne $mapArray[$j,$i].$direction -and $mapArray[$j,$i].Value -ge $mapArray[$j,$i].$direction)
             {
-                #top left
-                if($mapArray[$j,$i].Value -lt $mapArray[$j,$i].E -and $mapArray[$j,$i].Value -lt $mapArray[$j,$i].S)
-                {
-                    $lowSpotsRisk += $mapArray[$j,$i].Value
-                    $lowSpotCount++
-                }
-            }
-            elseif($i -eq 0 -and $j -gt 0)
-            {
-                #top right
-                if($mapArray[$j,$i].Value -lt $mapArray[$j,$i].W -and $mapArray[$j,$i].Value -lt $mapArray[$j,$i].S)
-                {
-                    $lowSpotsRisk += $mapArray[$j,$i].Value
-                    $lowSpotCount++
-                }
-            }
-            elseif($i -gt 0 -and $j -eq 0)
-            {
-                #bottom left
-                if($mapArray[$j,$i].Value -lt $mapArray[$j,$i].E -and $mapArray[$j,$i].Value -lt $mapArray[$j,$i].N)
-                {
-                    $lowSpotsRisk += $mapArray[$j,$i].Value
-                    $lowSpotCount++
-                }
-            }
-            else
-            {
-                #bottom right
-                if($mapArray[$j,$i].Value -lt $mapArray[$j,$i].W -and $mapArray[$j,$i].Value -lt $mapArray[$j,$i].N)
-                {
-                    $lowSpotsRisk += $mapArray[$j,$i].Value
-                    $lowSpotCount++
-                }
+                $lowSpot = $false
+                break
             }
         }
-        elseif($i -eq 0 -or $i -eq $puzzleY-1)
+        if($lowSpot)
         {
-            if($i -eq 0)
-            {
-                #top of map
-                if($mapArray[$j,$i].Value -lt $mapArray[$j,$i].W -and $mapArray[$j,$i].Value -lt $mapArray[$j,$i].E -and $mapArray[$j,$i].Value -lt $mapArray[$j,$i].S)
-                {
-                    $lowSpotsRisk += $mapArray[$j,$i].Value
-                    $lowSpotCount++
-                }
-            }
-            else
-            {
-                #bottom of map
-                if($mapArray[$j,$i].Value -lt $mapArray[$j,$i].W -and $mapArray[$j,$i].Value -lt $mapArray[$j,$i].E -and $mapArray[$j,$i].Value -lt $mapArray[$j,$i].N)
-                {
-                    $lowSpotsRisk += $mapArray[$j,$i].Value
-                    $lowSpotCount++
-                }
-            }
-        }
-        elseif($j -eq 0 -or $j -eq $puzzleX-1)
-        {
-            if($j -eq 0)
-            {
-                #map left
-                if($mapArray[$j,$i].Value -lt $mapArray[$j,$i].E -and $mapArray[$j,$i].Value -lt $mapArray[$j,$i].N -and $mapArray[$j,$i].Value -lt $mapArray[$j,$i].S)
-                {
-                    $lowSpotsRisk += $mapArray[$j,$i].Value
-                $lowSpotCount++
-                }
-
-            }
-            else
-            {
-                #map right
-                if($mapArray[$j,$i].Value -lt $mapArray[$j,$i].W -and $mapArray[$j,$i].Value -lt $mapArray[$j,$i].N -and $mapArray[$j,$i].Value -lt $mapArray[$j,$i].S)
-                {
-                    $lowSpotsRisk += $mapArray[$j,$i].Value
-                $lowSpotCount++
-                }
-            }
-        }
-        
-        else
-        {
-            # read all sides
-            if($mapArray[$j,$i].Value -lt $mapArray[$j,$i].W -and $mapArray[$j,$i].Value -lt $mapArray[$j,$i].E -and $mapArray[$j,$i].Value -lt $mapArray[$j,$i].N -and $mapArray[$j,$i].Value -lt $mapArray[$j,$i].S)
-            {
-                $lowSpotsRisk += $mapArray[$j,$i].Value
-                $lowSpotCount++
-            }
+            $lowSpotsRisk += $mapArray[$j,$i].Value
+            $lowSpotCount++
         }
     }
 }
