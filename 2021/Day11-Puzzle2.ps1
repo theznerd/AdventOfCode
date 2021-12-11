@@ -59,7 +59,7 @@ $step = 0
 do
 {
     $step++
-    [void](ResetFlashes $octopuses)
+    ResetFlashes $octopuses
     IncreaseEnergy $octopuses
     FlashOctopuses $octopuses
 }until($octopuses.Count -eq $octopuses.Where({$_.flashed -eq $true}).Count)
