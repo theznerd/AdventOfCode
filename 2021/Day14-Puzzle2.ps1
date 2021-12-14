@@ -1,3 +1,4 @@
+## Well, today we learn that non-primitives do not ALSO get cloned when cloning a hashtable :(
 $puzzleInput = Get-Content 'C:\Users\Nathan Ziehnert\OneDrive - Z-Nerd\Documents\AOC\2021\14\input.txt'
 $polymerTemplate = $puzzleInput[0]
 $pairInsertionRuleList = $puzzleInput[2..($puzzleInput.Length-1)]
@@ -32,21 +33,22 @@ for($i = 0; $i -lt $iterations; $i++)
 $countValues = @{}
 foreach($key in $valueTable.Keys)
 {
-    if($countValues.Keys -notcontains $key[0])
-    {
-        $countValues.Add($key[0],($valueTable[$key])[1])
-    }
-    else
+    if($countValues.Contains($key[0]))
     {
         $countValues[$key[0]] += ($valueTable[$key])[1]
     }
-    if($countValues.Keys -notcontains $key[1])
+    else
     {
-        $countValues.Add($key[1],($valueTable[$key])[1])
+        $countValues.Add($key[0],($valueTable[$key])[1])
+    }
+    if($countValues.Contains($key[1]))
+    {
+        
+        $countValues[$key[1]] += ($valueTable[$key])[1]
     }
     else
     {
-        $countValues[$key[1]] += ($valueTable[$key])[1]
+        $countValues.Add($key[1],($valueTable[$key])[1])
     }
 }
 $newCount = $countValues.Clone()
