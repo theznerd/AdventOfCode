@@ -1,7 +1,7 @@
 ## This could likely be cleaned up a lot
 ## It works though and is fairly quick by reducing
-## the valid Xvelocity set and testing Yvelocities until there are
-## no more valid Yvelocities to test (see lines 138-140)
+## the valid X sets and finding the Y max where
+## there's no more valid Y sets to test
 $puzzleInput = "target area: x=79..137, y=-176..-117"
 #$puzzleInput = "target area: x=20..30, y=-10..-5"
 
@@ -70,7 +70,7 @@ function CheckCoordinates($x,$y)
 }
 
 $yMaxHeight = 0
-$totalValidCoordinates = 0
+$totalValidVelocities = 0
 foreach($xV in $xValidV.Keys) # take each valid X velocity
 {
     $initialYVelocity = $yMinV
@@ -83,8 +83,8 @@ foreach($xV in $xValidV.Keys) # take each valid X velocity
         $yMaxHeightThisRound = 0
         
         # get $yPos after minimum steps
-        # we know it takes at least this many 
-        # steps for X to reach the target zone
+        # we know it takes at least this many steps for X to reach
+        # the target zone
         for($s = 1; $s -le ($xValidV[$xV])[0]; $s++)
         {
             $xPos += $xVelocity
@@ -101,7 +101,7 @@ foreach($xV in $xValidV.Keys) # take each valid X velocity
         {
             ## we found a valid coordinate
             $initialYVelocity++ # next round we check a higher initial Y velocity
-            $totalValidCoordinates++
+            $totalValidVelocities++
 
             # if we have a new max height, add it!
             if($yMaxHeightThisRound -gt $yMaxHeight){$yMaxHeight = $yMaxHeightThisRound}
@@ -128,7 +128,7 @@ foreach($xV in $xValidV.Keys) # take each valid X velocity
             {
                 ## we found a valid coordinate
                 $initialYVelocity++ # next round we check a higher initial Y velocity
-                $totalValidCoordinates++
+                $totalValidVelocities++
 
                 # if we have a new max height, add it!
                 if($yMaxHeightThisRound -gt $yMaxHeight){$yMaxHeight = $yMaxHeightThisRound}
@@ -163,4 +163,4 @@ foreach($xV in $xValidV.Keys) # take each valid X velocity
     }
 }
 "Max Y Height: $yMaxHeight"
-"Total Valid Coordinates: $totalValidCoordinates"
+"Total Valid Velocities: $totalValidVelocities"
