@@ -1,7 +1,7 @@
 ## This could likely be cleaned up a lot
 ## It works though and is fairly quick by reducing
-## the valid X sets and finding the Y max where
-## there's no more valid Y sets to test
+## the valid X sets and testing Y until there are
+## no more valid Y sets to test (see lines 138-140)
 $puzzleInput = "target area: x=79..137, y=-176..-117"
 #$puzzleInput = "target area: x=20..30, y=-10..-5"
 
@@ -83,8 +83,8 @@ foreach($xV in $xValidV.Keys) # take each valid X velocity
         $yMaxHeightThisRound = 0
         
         # get $yPos after minimum steps
-        # we know it takes at least this many steps for X to reach
-        # the target zone
+        # we know it takes at least this many 
+        # steps for X to reach the target zone
         for($s = 1; $s -le ($xValidV[$xV])[0]; $s++)
         {
             $xPos += $xVelocity
