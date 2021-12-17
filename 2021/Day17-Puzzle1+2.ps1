@@ -1,7 +1,7 @@
 ## This could likely be cleaned up a lot
 ## It works though and is fairly quick by reducing
-## the valid X sets and testing Y until there are
-## no more valid Y sets to test (see lines 138-140)
+## the valid Xvelocity set and testing Yvelocities until there are
+## no more valid Yvelocities to test (see lines 138-140)
 $puzzleInput = "target area: x=79..137, y=-176..-117"
 #$puzzleInput = "target area: x=20..30, y=-10..-5"
 
