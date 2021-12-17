@@ -15,8 +15,7 @@ $xMaxV = $xZoneRange[-1] # don't overshoot it in one step!
 
 #### add a min steps and max steps for $xValidV
 #### this has the added benefit of reducing the number of steps you have to test each y
-#### just remember that if Xvel = 0 and you're in range, there will be NO max steps
-#### so at that point you'll have to watch Y for going below the range
+#### just remember that if Xvel = 0 and you're in range, there will be infinite steps
 :xn for($xn = $xMaxV; $xn -gt 0; $xn--)
 {
     $xPos = 0
@@ -136,7 +135,7 @@ foreach($xV in $xValidV.Keys) # take each valid X velocity
                 continue ny
             }
 
-            # Y ALWAYS reaches back to zero (it's sort of a flat top parabola)
+            # Y ALWAYS reaches back to zero (it's a flat top parabola starting at 0)
             # So if we reach zero, and we're going to exceed the bottom of the range
             # no further Y velocity will be valid
             if($yPos -eq 0 -and ($yPos+$yVelocity) -lt $yZoneRange[0])
