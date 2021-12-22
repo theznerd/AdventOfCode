@@ -9,20 +9,6 @@ Class Cuboid
     [int]$y2
     [int]$z1
     [int]$z2
-    Cuboid()
-    {
-        # default constructor
-    }
-    Cuboid([RebootStep]$rebootStep)
-    {
-        $this.x1 = $rebootStep.x1
-        $this.x2 = $rebootStep.x2+1 # fix OBOE
-        $this.y1 = $rebootStep.y1
-        $this.y2 = $rebootStep.y2+1 # fix OBOE
-        $this.z1 = $rebootStep.z1
-        $this.z2 = $rebootStep.z2+1 # fix OBOE
-        $this.on = $rebootStep.state
-    }
     [long]GetVolume()
     {
         return ($this.x2-$this.x1)*($this.y2-$this.y1)*($this.z2-$this.z1)
@@ -39,17 +25,6 @@ Class Cuboid
         $newCuboid.on = $this.on
         return $newCuboid
     }
-}
-
-Class RebootStep
-{
-    [bool]$state
-    [int]$x1
-    [int]$x2
-    [int]$y1
-    [int]$y2
-    [int]$z1
-    [int]$z2
 }
 
 function Get-OverlappingCoordinates($cuboidOne, $cuboidTwo)
