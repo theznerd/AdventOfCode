@@ -15,20 +15,20 @@
 ## From my sample input
 # z = stack (pop / push)
 # instruction set
-#   z = 16+w1
-#   z = 16+w1, 3+w2
-#   z = 16+w1, 3+w2, 2+w3
-#   z = 16+w1, 3+w2, 2+w3, 7+w4
-#   z = 16+w1, 3+w2, 2+w3, (POP FROM STACK)
-#   z = 16+w1, 3+w2, 2+w3, 6+w6
-#   z = 16+w1, 3+w2, 2+w3, (POP FROM STACK)
-#   z = 16+w1, 3+w2, 2+w3, 11+w8
-#   z = 16+w1, 3+w2, 2+w3, (POP FROM STACK)
-#   z = 16+w1, 3+w2, (POP FROM STACK)
-#   z = 16+w1, 3+w2, 11+w11
-#   z = 16+w1, 3+w2, (POP FROM STACK)
-#   z = 16+w1, (POP FROM STACK)
-#   z = (POP FROM STACK)
+#  1  z = 16+w1
+#  2  z = 16+w1, 3+w2
+#  3  z = 16+w1, 3+w2, 2+w3
+#  4  z = 16+w1, 3+w2, 2+w3, 7+w4
+#  5  z = 16+w1, 3+w2, 2+w3, (5 is popping 4 from the stack)
+#  6  z = 16+w1, 3+w2, 2+w3, 6+w6
+#  7  z = 16+w1, 3+w2, 2+w3, (7 is popping 6 from the stack)
+#  8  z = 16+w1, 3+w2, 2+w3, 11+w8
+#  9  z = 16+w1, 3+w2, 2+w3, (9 is popping 8 from the stack)
+#  10 z = 16+w1, 3+w2, (10 is popping 3 from the stack)
+#  11 z = 16+w1, 3+w2, 11+w11
+#  12 z = 16+w1, 3+w2, (12 is popping 11 from the stack)
+#  13 z = 16+w1, (13 is popping 2 from the stack)
+#  14 z = (14 is popping 1 from the stack)
 ##
 ##
 # for a number to be valid (for the pops to work)
