@@ -18,6 +18,7 @@ foreach($pair in $input)
     #>
 
     ## this is still slow as hell
+    <#
     $elfoneLow, $elfoneHigh, $elftwoLow, $elftwoHigh = $pair.Split(',').Split('-')
     [int[]]$elfone = $elfoneLow..$elfoneHigh
     [int[]]$elftwo = $elftwoLow..$elftwoHigh
@@ -28,6 +29,19 @@ foreach($pair in $input)
     else
     {
         if(-not @($elfone| where {$elftwo -notcontains $_}).Count){$fullOverlaps++}
+    }
+    #>
+
+    ## of course the others were slow as hell
+    ## forgot these were ranges, not random
+    ## assignments... I was previously attempting
+    ## to cover situations where an elf could be
+    ## assigned 1,2,5 and not 1,2,3,4,5
+    [int]$elfoneLow, [int]$elfoneHigh, [int]$elftwoLow, [int]$elftwoHigh = $pair.Split(',').Split('-')
+    if(($elfoneLow -ge $elftwoLow -and $elfoneHigh -le $elftwoHigh) -or
+       ($elftwolow -ge $elfoneLow -and $elftwohigh -le $elfoneHigh))
+    {
+        $fullOverlaps++
     }
 }
 $fullOverlaps
