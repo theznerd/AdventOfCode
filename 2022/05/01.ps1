@@ -6,7 +6,7 @@ $stackArray = ($input[($stackListLine-1)]).Split("   ").Replace(" ","")
 $stackHash = @{}
 foreach($stack in $stackarray)
 {
-    $stackHash.Add($stack, [System.Collections.Generic.List[object]]@())
+    $stackHash.Add($stack, [System.Collections.Generic.Stack[object]]::new())
 }
 
 for($i = ($stackListLine-2); $i -ge 0; $i--)
@@ -16,7 +16,7 @@ for($i = ($stackListLine-2); $i -ge 0; $i--)
     {
         if(-not [string]::IsNullOrWhiteSpace(($input[$i].ToCharArray())[$c]))
         {
-            $stackHash["$s"].Add(($input[$i].ToCharArray())[$c])
+            [void]$stackHash["$s"].Push(($input[$i].ToCharArray())[$c])
         }
         $s++
     }
@@ -28,15 +28,14 @@ foreach($instruction in $instructions)
     $null, $count, $null, $source, $null, $dest = $instruction.Split(" ")
     for($m = 0; $m -lt $count; $m++)
     {
-        $movingCrate = $stackHash["$source"][-1]
-        $stackHash["$source"].RemoveAt(($stackHash["$source"].Count-1))
-        $stackHash["$dest"].Add($movingCrate)
+        $movingCrate = $stackHash["$source"].Pop()
+        [void]$stackHash["$dest"].Push($movingCrate)
     }
 }
 
 $outputString = ""
 for($i = 1; $i -le $stackHash.Count; $i++)
 {
-    $outputString += $stackHash["$i"][-1]
+    $outputString += $stackHash["$i"].Pop()
 }
 $outputString
