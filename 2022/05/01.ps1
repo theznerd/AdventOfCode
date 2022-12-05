@@ -6,8 +6,7 @@ $stackArray = ($input[($stackListLine-1)]).Split("   ").Replace(" ","")
 $stackHash = @{}
 foreach($stack in $stackarray)
 {
-    $blankList = [System.Collections.Generic.List[object]]@()
-    $stackHash.Add($stack, $blankList)
+    $stackHash.Add($stack, [System.Collections.Generic.List[object]]@())
 }
 
 for($i = ($stackListLine-2); $i -ge 0; $i--)
