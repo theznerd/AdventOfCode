@@ -34,28 +34,23 @@ foreach($i in $input)
     if($i.StartsWith("$"))
     {
         $null, $cmd, $param = $i.Split(" ")
-        switch ($cmd) {
-            "cd" { 
-                if($param -eq "/")
-                {
-                    # go to root directory
-                    $currentDirectory = $rootDirectory
-                }
-                elseif($param -eq "..")
-                {
-                    # move up directory
-                    $currentDirectory = $currentDirectory.parentDirectory
-                }
-                else
-                {
-                    # move down directory
-                    $currentDirectory = ($currentDirectory.directories.Where({$_.name -eq "$param"}))[0]
-                }
+        if($cmd -eq "cd")
+        { 
+            if($param -eq "/")
+            {
+                # go to root directory
+                $currentDirectory = $rootDirectory
             }
-            "ls" { 
-                ## should we do anything here? I don't think so
-                ## not yet at least
-             }
+            elseif($param -eq "..")
+            {
+                # move up directory
+                $currentDirectory = $currentDirectory.parentDirectory
+            }
+            else
+            {
+                # move down directory
+                $currentDirectory = ($currentDirectory.directories.Where({$_.name -eq "$param"}))[0]
+            }
         }
     }
     else
