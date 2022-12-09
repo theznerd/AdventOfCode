@@ -14,11 +14,7 @@ class Tail
     Tail($x,$y){$this.x = $x; $this.y = $y}
     [void]GetNewPosition($h)
     {
-        if([Math]::Abs($h.x - $this.x) -le 1 -and [Math]::Abs($h.y - $this.y) -le 1)
-        {
-            ## we're within the the spot where the tail doesn't move
-        }
-        elseif([Math]::Abs($h.x - $this.x) -eq 2 -and $h.y -eq $this.y) ## we're two positions away on the x
+        if([Math]::Abs($h.x - $this.x) -eq 2 -and $h.y -eq $this.y) ## we're two positions away on the x
         {
             if($h.x -lt $this.x){$this.x--}
             else{$this.x++}
@@ -39,10 +35,6 @@ class Tail
             $this.x = $h.x ## always pull to the column
             if($h.y -lt $this.y){$this.y--}
             else{$this.y++}
-        }
-        else
-        {
-            throw "something went wrong... the tail is too far away from the head"
         }
     }
 }
