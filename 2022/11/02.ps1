@@ -42,7 +42,6 @@ class Item {
                 }
             }
         }
-        Write-Output "Inspected Item"
     }
 }
 
