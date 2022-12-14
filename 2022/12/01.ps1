@@ -1,4 +1,4 @@
-$puzzleInput = Get-Content $PSScriptRoot\example.txt
+$puzzleInput = Get-Content $PSScriptRoot\input.txt
 
 $maxX = $puzzleInput[0].ToCharArray().Count
 $maxY = $puzzleInput.Count
