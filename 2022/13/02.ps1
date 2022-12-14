@@ -10,11 +10,6 @@ class Packet : System.IComparable {
         $this.packetContents = $PacketString | ConvertFrom-Json -NoEnumerate
     }
 
-    static [bool]ComparePacket([Packet]$leftPacket, [Packet]$rightPacket)
-    {
-        return [Packet]::CompareList($leftPacket.packetContents, $rightPacket.packetContents)
-    }
-
     [int] CompareTo($rightPacket)
     {
         $result = [Packet]::CompareList($this.packetContents, $rightPacket.packetContents)
@@ -95,11 +90,6 @@ class Packet : System.IComparable {
         else{
             return -1 ## equality, continue
         }
-    }
-
-    hidden static [Array]ConvertIntToArray([int]$int)
-    {
-        return @($int)
     }
 }
 
