@@ -36,9 +36,8 @@ function Update-Digits ($string) {
     $lastValue = ""
     foreach($word in $words)
     {
-        $regx = [regex]"$word"
-        $m = $regx.Matches($newString)
-        if($m -and $m[-1].Index -gt $lastIndex){$lastIndex = $m[-1].Index; $lastLength = $m[-1].Length; $lastValue = $m[-1].Value}
+        $index = $newString.LastIndexOf($word)
+        if($index -gt $lastIndex){$lastIndex = $index; $lastLength = $word.Length; $lastValue = $word}
     }
     if($lastIndex -eq -1){
         return $newString
