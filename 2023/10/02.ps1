@@ -3,6 +3,7 @@ $puzzleInput = Get-Content $PSScriptRoot\input.txt
 
 ## time to "cheat"
 Add-Type -AssemblyName PresentationCore ## lots of drawing items in here
+Add-Type -AssemblyName WindowsBase
 
 class ElfPipe {
     [int[]]$entry1
