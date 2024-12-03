@@ -17,7 +17,7 @@ foreach($i in $allInstructions){
         {
             if($do)
             {
-                $a, $b = $i.Value.Split(",")
+                [int]$a, [int]$b = $i.Value.Split(",")
                 $sum += $a*$b
             }
         }
