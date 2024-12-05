@@ -4,9 +4,6 @@ $puzzleInput = Get-Content $PSScriptRoot\input.txt
 $rules = @{}
 ([Regex]::Matches($puzzleInput,"\d{1,2}\|\d{1,2}")) | ForEach-Object {
     [int[]]$ruleParts = $_.Value.Split("|")
-    if (-not $rules.ContainsKey($ruleParts[0])) {
-        $rules[$ruleParts[0]] = @()
-    }
     $rules[$ruleParts[0]] += ,$ruleParts
 }
 
