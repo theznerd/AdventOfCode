@@ -13,22 +13,15 @@ $instructions = @()
 }
 
 $sum = 0
-foreach($instruction in $instructions){
-    $repaired = $false
-    :page for($i = 1; $i -lt $instruction.Count; $i++){
+:instruction foreach($instruction in $instructions){
+    for($i = 1; $i -lt $instruction.Count; $i++){
         $rulesToTest = if($rules[($instruction[$i])]){$rules[($instruction[$i])]| ForEach-Object {$_[1]}}else{@()}
         for($x = 0; $x -lt $i; $x++){
             if($instruction[$x] -in $rulesToTest){
-                $item = $instruction[$i]
-                $instruction.RemoveAt($i)
-                $instruction.Insert($x, $item)
-                $repaired = $true
-                continue page
+                continue instruction
             }
         }
     }
-    if($repaired){
-        $sum += $instruction[([Math]::floor($instruction.count / 2))]
-    }
+    $sum += $instruction[([Math]::floor($instruction.count / 2))]
 }
 $sum
