@@ -13,20 +13,22 @@ foreach($bank in $puzzleInput)
     {
         $maxValue = 0
 
-        # search from the end minus $i, but stop before the last value found...
-        # basically we want to search between the latest possible battery and
-        # the last battery we found in the previous iteration
+        # search from the right minus $i (leaves enough batteries on the right side to
+        # make a bank of $i batteries), but stop before the last value found...
+        # basically we want to search between the furthest possible right battery 
+        # and the last battery we found in the previous iteration
         for($j = $bank.Length - $i; $j -gt $lastMaxIndex; $j--)
         {
             # we want the largest number searching right to left, but 
-            # we want the first occurrence of it from left to right (hence the -ge)
+            # we want the first occurrence of it from left to right to
+            # maximize the remaining batteries for the next searches
             if([Int]::Parse($bank[$j]) -ge $maxValue)
             {
                 $maxValue = [Int]::Parse($bank[$j])
                 $currentMaxIndex = $j
             }
         }
-        $lastMaxIndex = $currentMaxIndex # this is the end (or beginning depending on how you look at it) of our next search
+        $lastMaxIndex = $currentMaxIndex # this is the "leftmost" index for the next search
         $maxValues[$i] = $maxValue # store the max value found for this position
     }
     $outputJoltage += [BigInt]::Parse($maxValues.Values -join '')
